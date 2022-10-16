@@ -7,6 +7,7 @@ import {PeripheralService} from '../../services/peripheral.service';
 import {Peripheral} from '../../interfaces/Peripheral';
 import {GatewayService} from '../../services/gateway.service';
 import {BehaviorSubject} from 'rxjs';
+import {CommonService, NOTIFICATION_TYPE_ERROR, NOTIFICATION_TYPE_SUCCESS} from '../../services/common.service';
 
 const rxIPv4 = /^(?!0)(?!.*\.$)((1?\d?\d|25[0-5]|2[0-4]\d)(\.|$)){4}$/;
 
@@ -25,6 +26,7 @@ export class FormComponent implements OnInit {
         @Inject(MAT_DIALOG_DATA) public anyVariable,
         private fb: FormBuilder,
         private matDialog: MatDialog,
+        private common: CommonService,
         private gatewayService: GatewayService,
         private peripheralService: PeripheralService
     ) {
@@ -47,21 +49,20 @@ export class FormComponent implements OnInit {
 
     async save() {
         try {
-            let resp;
             if (this.gateway._id) {
-                console.log(this.gateway);
-                resp = await this.gatewayService.update(this.formGateway.value)
+                await this.gatewayService.update(this.formGateway.value)
+                this.common.showNotification('Success gateway updated', '', NOTIFICATION_TYPE_SUCCESS);
             } else {
                 if (this.formGateway.get('peripheral').value === null) {
                     this.formGateway.get('peripheral').setValue([]);
                 }
-                resp = await this.gatewayService.create(this.formGateway.value);
+                await this.gatewayService.create(this.formGateway.value);
+                this.common.showNotification('Success gateway created', '', NOTIFICATION_TYPE_SUCCESS);
             }
-            console.log(resp);
             this.matDialog.closeAll();
             await this.gatewayService.load();
         } catch (e) {
-
+            this.common.showNotification(e.message, 'Internal Error', NOTIFICATION_TYPE_ERROR);
         }
     }
 

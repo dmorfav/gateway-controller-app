@@ -1,0 +1,32 @@
+<mat-card>
+    <mat-card-title>
+        {{peripheral._id ? 'Update a peripheral' : 'Create a new peripheral'}}
+    </mat-card-title>
+    <mat-card-content>
+        <div class="example-container">
+            <form [formGroup]="formPeripheral">
+                <mat-form-field appearance="fill">
+                    <mat-label>UID</mat-label>
+                    <input readonly="true" formControlName="uid" matInput>
+                </mat-form-field>
+                <mat-form-field appearance="fill">
+                    <mat-label>Vendor</mat-label>
+                    <input formControlName="vendor" matInput placeholder="Insert a name for gateway">
+                </mat-form-field>
+                <mat-button-toggle-group formControlName="isOnline" name="favoriteColor" style="margin-bottom: 2vh" aria-label="Favorite Color">
+                    <mat-button-toggle [checked]="peripheral.isOnline" [value]="true">Online</mat-button-toggle>
+                    <mat-button-toggle [checked]="!peripheral.isOnline" [value]="false">Offline</mat-button-toggle>
+                </mat-button-toggle-group>
+                <mat-form-field appearance="fill">
+                    <input matInput [matDatepicker]="dp" placeholder="Creation Date" [max]="today" formControlName="dateCreated">
+                    <mat-datepicker-toggle matSuffix [for]="dp"></mat-datepicker-toggle>
+                    <mat-datepicker #dp></mat-datepicker>
+                </mat-form-field>
+                <button mat-button color="primary" (click)="save()" type="submit" [disabled]="formPeripheral.invalid">
+                    Save
+                </button>
+                <button mat-button color="accent" (click)="cancel()" type="button">Cancel</button>
+            </form>
+        </div>
+    </mat-card-content>
+</mat-card>
