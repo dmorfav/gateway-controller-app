@@ -4,8 +4,12 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header card-header-danger">
-                        <h4 class="card-title ">Simple Table</h4>
-                        <p class="card-category"> Here is a subtitle for this table</p>
+                        <h4 class="card-title ">Gateway List</h4>
+                        <p class="card-category"> A list of gateway registered</p>
+                        <span class="pull-right"><button (click)="form()" mat-mini-fab color="primary"
+                                       aria-label="Edit gateway data">
+                                                        <mat-icon>add_circle</mat-icon>
+                                                    </button></span>
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
@@ -18,116 +22,49 @@
                                     Name
                                 </th>
                                 <th>
-                                    Country
+                                    IPv4
                                 </th>
                                 <th>
-                                    City
+                                    Peripherals
                                 </th>
                                 <th>
-                                    Salary
+                                    Actions
                                 </th>
                                 </thead>
                                 <tbody>
-                                <tr>
-                                    <td>
-                                        1
-                                    </td>
-                                    <td>
-                                        Dakota Rice
-                                    </td>
-                                    <td>
-                                        Niger
-                                    </td>
-                                    <td>
-                                        Oud-Turnhout
-                                    </td>
-                                    <td class="text-primary">
-                                        $36,738
-                                    </td>
+                                <tr *ngIf="gatewayList$.value.length === 0">
+                                    No exist data available
                                 </tr>
-                                <tr>
+                                <tr *ngFor="let gt of gatewayList$|async">
                                     <td>
-                                        2
+                                        {{gt.uid}}
                                     </td>
                                     <td>
-                                        Minerva Hooper
+                                        {{gt.name}}
                                     </td>
                                     <td>
-                                        Curaçao
+                                        {{gt.ipv4}}
                                     </td>
                                     <td>
-                                        Sinaai-Waas
+                                        <mat-chip-list aria-label="Fish selection">
+                                            <mat-chip color="primary">{{gt.peripheral.length || 0}}</mat-chip>
+                                        </mat-chip-list>
                                     </td>
                                     <td class="text-primary">
-                                        $23,789
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        3
-                                    </td>
-                                    <td>
-                                        Sage Rodriguez
-                                    </td>
-                                    <td>
-                                        Netherlands
-                                    </td>
-                                    <td>
-                                        Baileux
-                                    </td>
-                                    <td class="text-primary">
-                                        $56,142
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        4
-                                    </td>
-                                    <td>
-                                        Philip Chaney
-                                    </td>
-                                    <td>
-                                        Korea, South
-                                    </td>
-                                    <td>
-                                        Overland Park
-                                    </td>
-                                    <td class="text-primary">
-                                        $38,735
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        5
-                                    </td>
-                                    <td>
-                                        Doris Greene
-                                    </td>
-                                    <td>
-                                        Malawi
-                                    </td>
-                                    <td>
-                                        Feldkirchen in Kärnten
-                                    </td>
-                                    <td class="text-primary">
-                                        $63,542
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        6
-                                    </td>
-                                    <td>
-                                        Mason Porter
-                                    </td>
-                                    <td>
-                                        Chile
-                                    </td>
-                                    <td>
-                                        Gloucester
-                                    </td>
-                                    <td class="text-primary">
-                                        $78,615
+                                        <div class="example-button-row">
+                                            <div class="example-flex-container">
+                                                <div class="example-button-container">
+                                                    <button (click)="form(gt)" mat-mini-fab color="primary"
+                                                            aria-label="Edit gateway data">
+                                                        <mat-icon>edit_note</mat-icon>
+                                                    </button>
+                                                    <button (click)="delete(gt.uid)" mat-mini-fab color="accent"
+                                                            aria-label="Delete a gateway">
+                                                        <mat-icon>delete</mat-icon>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </td>
                                 </tr>
                                 </tbody>

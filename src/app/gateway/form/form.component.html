@@ -1,0 +1,31 @@
+<mat-card>
+    <mat-card-title>
+        {{gateway._id ? 'Update a gateway' :'Create a new Gateway'}}
+    </mat-card-title>
+    <mat-card-content>
+        <div class="example-container">
+            <form [formGroup]="formGateway">
+                <mat-form-field appearance="fill">
+                    <mat-label>UID</mat-label>
+                    <input readonly="true" formControlName="uid" matInput>
+                </mat-form-field>
+                <mat-form-field appearance="fill">
+                    <mat-label>Name</mat-label>
+                    <input formControlName="name" matInput placeholder="Insert a name for gateway">
+                </mat-form-field>
+                <mat-form-field appearance="fill">
+                    <mat-label>Ipv4</mat-label>
+                    <input formControlName="ipv4" matInput placeholder="Insert a ipv4 for gateway">
+                </mat-form-field>
+                <mat-form-field appearance="fill">
+                    <mat-select formControlName="peripheral" multiple="true" placeholder="Peripherals List">
+                        <mat-option>-- None --</mat-option>
+                        <mat-option *ngFor="let peripheral of peripheralList$|async" value="{{peripheral.uid}}">{{peripheral.vendor}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <button mat-button color="primary" (click)="save()" type="submit" [disabled]="formGateway.invalid">Save</button>
+                <button mat-button color="accent" (click)="cancel()" type="button">Cancel</button>
+            </form>
+        </div>
+    </mat-card-content>
+</mat-card>
