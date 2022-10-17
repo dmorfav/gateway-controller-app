@@ -21,6 +21,15 @@ export class GatewayResService {
         return lastValueFrom(this.http.delete(`${environment.apiURL}/gateway/delete`, {params: {id}}));
     }
 
+    async deletePeripheral(gatewayId: string, peripheralId: string): Promise<any> {
+        return lastValueFrom(this.http.delete(`${environment.apiURL}/gateway/delete/peripheral`, {
+            params: {
+                peripheral_id: peripheralId,
+                gateway_id: gatewayId
+            }
+        }));
+    }
+
     async create(gateway: Gateway): Promise<any> {
         return lastValueFrom(this.http.post(`${environment.apiURL}/gateway/create`, gateway));
     }

@@ -55,7 +55,7 @@ export class FormComponent implements OnInit {
       this.matDialog.closeAll();
       await this.peripheralService.load();
     } catch (e) {
-      this.common.showNotification(e.message, 'Internal Error', NOTIFICATION_TYPE_ERROR);
+      this.common.showNotification(e.error.message, 'Internal Error', NOTIFICATION_TYPE_ERROR);
     }
   }
 

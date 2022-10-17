@@ -30,6 +30,10 @@ export class GatewayService {
         return await this.gatewayRes.delete(id);
     }
 
+    async deletePeripheral(gatewayId: string, peripheralId: string): Promise<Status> {
+        return await this.gatewayRes.deletePeripheral(gatewayId, peripheralId);
+    }
+
     async create(gateway: Gateway): Promise<Gateway> {
         return await this.gatewayRes.create(gateway);
     }

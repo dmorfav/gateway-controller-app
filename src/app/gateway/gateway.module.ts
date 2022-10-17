@@ -13,6 +13,7 @@ import { FormComponent } from './form/form.component';
 import {MatDialog, MatDialogModule} from '@angular/material/dialog';
 import {ReactiveFormsModule} from '@angular/forms';
 import {MatCardModule} from '@angular/material/card';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
 
 
 
@@ -30,7 +31,8 @@ import {MatCardModule} from '@angular/material/card';
     MatIconModule,
     CommonModule,
     ReactiveFormsModule,
-    MatCardModule
+    MatCardModule,
+    MatAutocompleteModule
   ]
 })
 export class GatewayModule { }
