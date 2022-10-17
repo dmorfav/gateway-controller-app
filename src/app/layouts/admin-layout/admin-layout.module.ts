@@ -13,6 +13,7 @@ import {MatSelectModule} from '@angular/material/select';
 import {MatChipsModule} from '@angular/material/chips';
 import {MatIconModule} from '@angular/material/icon';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 @NgModule({
     imports: [
@@ -29,6 +30,7 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
         MatChipsModule,
         MatIconModule,
         MatSnackBarModule,
+        MatProgressSpinnerModule,
     ],
     declarations: [
         DashboardComponent,
